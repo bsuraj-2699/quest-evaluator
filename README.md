@@ -184,7 +184,7 @@ Score objectively — no bias toward verbose submissions.
 ### Option A — Use Deployed Version (Recommended)
 Access the live deployment directly — no local setup needed:
 ```
-https://your-app.railway.app
+  https://quest-evaluator-production.up.railway.app
 ```
 
 ### Option B — Run Locally
