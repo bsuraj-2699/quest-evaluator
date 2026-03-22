@@ -1,5 +1,5 @@
 {
-  "name": "must-company-quest-evaluator",
+  "name": "quest-evaluator",
   "version": "1.0.0",
   "private": true,
   "main": "server.js",

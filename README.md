@@ -1,6 +1,6 @@
-# Must Company — Quest Submission Evaluator Agent
+# Quest Submission Evaluator Agent
 
-> **Built for Must Company's FDE & APO hiring process.**
+> **Automated evaluation system for AI-native companies using quest-based hiring.**
 > An AI-native, fully automated hiring pipeline — from Google Form submission to scored employer dashboard — built in under 24 hours using Cursor.
 
 ```
@@ -12,14 +12,14 @@ Google Form → Google Sheets → Auto Agent Evaluation → Employer Dashboard
 ## 🧠 Problem Specialization
 
 ### The Problem
-Must Company's quest-based hiring process requires evaluating AI agents submitted by candidates. Each submission includes a GitHub repo or ZIP file, a problem statement, performance metrics, and benchmark comparisons. Manually reviewing these is:
+Quest-based hiring for AI-native companies requires evaluating AI agents submitted by candidates. Each submission includes a GitHub repo or ZIP file, a problem statement, performance metrics, and benchmark comparisons. Manually reviewing these is:
 
 - **Time-consuming** — reading code, READMEs, and evaluating reasoning takes hours per candidate
 - **Inconsistent** — different reviewers score differently
 - **Unscalable** — as applications grow, manual review breaks down
 
 ### Why This Problem?
-This was the #1 priority because it directly mirrors Must Company's own hiring workflow. Instead of building *for* the job posting, this agent *is* the job posting — it automates the exact process described in the quest requirements. That's Priority Definition Ability in action.
+This was the #1 priority because it directly mirrors the quest-based hiring workflow. Instead of building *for* the job posting, this agent *is* the job posting — it automates the exact process described in quest requirements. That's Priority Definition Ability in action.
 
 ### North Star
 > **Zero manual effort for the employer. One Google Form link shared with candidates. Everything else is automated.**
@@ -28,7 +28,7 @@ This was the #1 priority because it directly mirrors Must Company's own hiring w
 
 ## ⚡ Agent Overview
 
-This system automates candidate evaluation for Must Company's FDE (Forward Deployed Engineers) and APO (AI-Native Product Owners) hiring:
+This system automates candidate evaluation for AI-native companies using quest-based hiring:
 
 1. Candidates fill out a **Google Form** with their quest submission
 2. Responses flow automatically into a **Google Sheet**
@@ -66,7 +66,7 @@ The score is calculated across 5 dimensions:
 ### Measurement Process
 - **Pipeline Automation:** Measured by number of manual steps required (target: zero). Currently 0 manual steps after initial setup.
 - **AI Leverage Efficiency:** Time from form submission to scored result. Average: **~8 seconds**.
-- **Problem-Solution Fit:** Direct mapping between Must Company's quest requirements and implemented features. 10/10 requirements fully covered including Google Drive ZIP auto-download and Railway deployment.
+- **Problem-Solution Fit:** Direct mapping between quest requirements and implemented features. 10/10 requirements fully covered including Google Drive ZIP auto-download and Railway deployment.
 - **Multi-Provider Flexibility:** Tested with OpenAI (gpt-4o), confirmed compatible with Anthropic, Gemini, Mistral, Groq via identical API interface.
 - **Security:** API keys server-side only, credentials.json excluded from repo, .gitignore configured.
 
@@ -170,7 +170,7 @@ This project is **fully Cursor-native**:
 
 ### .cursorrules Philosophy
 ```
-You are an AI hiring evaluator for Must Company.
+You are an AI hiring evaluator for an AI-native company.
 Priority: Evaluate candidates on Priority Definition Ability above all else.
 Never hardcode API keys.
 Always return structured JSON.
@@ -333,18 +333,18 @@ To add new AI providers:
 
 ---
 
-## 📬 Why This Agent?
+## Why This Agent?
 
-Must Company said:
+Quest-based hiring philosophy:
 > *"If we had to name just one essential quality — Priority Definition Ability."*
 
-This agent was built by first asking: **"What is Must Company's actual problem?"**
+This agent was built by first asking: **"What is the company's actual problem?"**
 
 The answer: manually evaluating dozens of quest submissions is slow, inconsistent, and unscalable.
 
 The priority was clear. The solution followed.
 
-That's the entire philosophy of this submission.
+That's the core philosophy of quest-based evaluation.
 
 ---
 
