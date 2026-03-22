@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Must Company — Hiring Dashboard</title>
+  <style>
+    :root{
+      --bg:#0b0f17; --panel:#0f172a; --text:#e5e7eb; --muted:#94a3b8; --border:rgba(148,163,184,.18);
+      --good:#22c55e; --blue:#3b82f6; --maybe:#fbbf24; --bad:#ef4444;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:ui-sans-serif,system-ui;background:radial-gradient(1200px 600px at 20% 0%,rgba(96,165,250,.18),transparent 60%),radial-gradient(900px 500px at 90% 10%,rgba(34,197,94,.12),transparent 55%),var(--bg);color:var(--text)}
+    .wrap{max-width:1440px;margin:0 auto;padding:20px 16px}
+    h1{margin:0 0 6px;font-size:22px;letter-spacing:.2px}
+    .sub{color:var(--muted);font-size:13px;margin-bottom:16px}
+    .header-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+    .status-box{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;background:rgba(2,6,23,.4);border:1px solid var(--border)}
+    .dot{width:10px;height:10px;border-radius:999px;background:#475569}
+    .dot.on{background:var(--good);box-shadow:0 0 0 3px rgba(34,197,94,.15)}
+    .status-text{font-size:13px;font-weight:700}
+    .sync-info{font-size:12px;color:var(--muted);margin-left:8px}
+    .btn{cursor:pointer;border:0;border-radius:10px;padding:9px 14px;font-weight:700;background:linear-gradient(135deg,#60a5fa,#3b82f6);color:#06121f;transition:filter .12s}
+    .btn:hover{filter:brightness(1.08)}
+    .btn:disabled{opacity:.6;cursor:not-allowed}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+    @media (max-width: 980px){.stats{grid-template-columns:repeat(2,1fr)}}
+    .stat{background:rgba(2,6,23,.35);border:1px solid rgba(148,163,184,.14);border-radius:12px;padding:12px}
+    .stat-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.18px;font-weight:800}
+    .stat-value{font-size:24px;font-weight:900;margin-top:4px}
+    .controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+    .filter-label{font-size:13px;font-weight:700;color:var(--muted)}
+    .filter-btn{padding:6px 12px;border-radius:8px;border:1px solid rgba(148,163,184,.2);background:rgba(2,6,23,.35);color:var(--text);cursor:pointer;font-size:12px;font-weight:700}
+    .filter-btn.active{background:rgba(96,165,250,.2);border-color:rgba(96,165,250,.4)}
+    select{padding:6px 10px;border-radius:8px;background:rgba(2,6,23,.55);border:1px solid rgba(148,163,184,.18);color:var(--text);font-size:12px}
+    .feed{display:grid;gap:12px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.03),transparent 30%),var(--panel);border:1px solid var(--border);border-radius:14px;padding:14px;cursor:pointer;transition:transform .08s,box-shadow .12s}
+    .card:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.4)}
+    .card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+    .card-name{font-weight:800;font-size:15px}
+    .card-title{color:var(--muted);font-size:13px;margin-top:4px}
+    .card-contact{font-size:12px;color:var(--muted);margin-top:4px}
+    .card-score{text-align:right}
+    .card-score-num{font-size:28px;font-weight:900}
+    .card-score-sub{font-size:12px;color:var(--muted)}
+    .badge{display:inline-block;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:800;margin-top:8px}
+    .badge.good{background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.4);color:#86efac}
+    .badge.blue{background:rgba(59,130,246,.14);border:1px solid rgba(59,130,246,.4);color:#93c5fd}
+    .badge.maybe{background:rgba(251,191,36,.14);border:1px solid rgba(251,191,36,.4);color:#fde047}
+    .badge.bad{background:rgba(239,68,68,.14);border:1px solid rgba(239,68,68,.4);color:#fca5a5}
+    .card-details{margin-top:12px;display:none}
+    .card.expanded .card-details{display:block}
+    .mini-bars{display:grid;gap:8px;margin-top:10px}
+    .mini-bar{display:flex;align-items:center;gap:8px}
+    .mini-bar-label{font-size:11px;color:var(--muted);min-width:100px}
+    .mini-bar-track{flex:1;height:6px;background:rgba(148,163,184,.12);border-radius:999px;overflow:hidden}
+    .mini-bar-fill{height:100%;border-radius:999px}
+    .mini-bar-fill.good{background:linear-gradient(90deg,#22c55e,#10b981)}
+    .mini-bar-fill.blue{background:linear-gradient(90deg,#3b82f6,#60a5fa)}
+    .mini-bar-fill.maybe{background:linear-gradient(90deg,#fbbf24,#f59e0b)}
+    .mini-bar-fill.bad{background:linear-gradient(90deg,#ef4444,#f43f5e)}
+    .mini-bar-value{font-size:11px;font-weight:800;color:var(--text);min-width:32px;text-align:right}
+    .list-section{margin-top:12px}
+    .list-title{font-size:12px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.18px;margin-bottom:6px}
+    ul{margin:0;padding-left:16px}
+    li{font-size:13px;line-height:1.4;margin:4px 0}
+    .empty{color:var(--muted);font-size:14px;padding:40px 20px;text-align:center}
+    .toggle-btn{margin-top:12px;padding:6px 12px;font-size:12px;border-radius:8px;background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.25);color:#bfdbfe;font-weight:700;cursor:pointer}
+    .timestamp{font-size:11px;color:var(--muted);margin-top:6px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header-row">
+      <div>
+        <h1>Must Company — Hiring Dashboard</h1>
+        <div class="sub">Google Form → Google Sheets → Auto Agent Evaluation → Employer Dashboard</div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div class="status-box">
+          <div id="connDot" class="dot"></div>
+          <div id="connText" class="status-text">Checking connection...</div>
+        </div>
+        <button id="syncBtn" class="btn" type="button">Sync Now</button>
+      </div>
+    </div>
+
+    <div id="lastSync" class="sync-info" style="margin-bottom:12px;">Last synced: -</div>
+    <div id="lastErr" style="color:#fca5a5;font-size:12px;margin-bottom:12px;"></div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label">Total Candidates</div>
+        <div class="stat-value" id="statTotal">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Processed</div>
+        <div class="stat-value" id="statProcessed">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Pending</div>
+        <div class="stat-value" id="statPending">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Strong Yes</div>
+        <div class="stat-value" id="statStrongYes">0</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="Strong Yes">Strong Yes</button>
+      <button class="filter-btn" data-filter="Yes">Yes</button>
+      <button class="filter-btn" data-filter="Maybe">Maybe</button>
+      <button class="filter-btn" data-filter="No">No</button>
+      <span class="filter-label" style="margin-left:12px;">Sort by:</span>
+      <select id="sortSelect">
+        <option value="score">Score (High to Low)</option>
+        <option value="date">Date (Recent First)</option>
+        <option value="name">Name (A-Z)</option>
+      </select>
+    </div>
+
+    <div id="feed" class="feed"></div>
+    <div id="empty" class="empty" style="display:none;">
+      Waiting for quest submissions...<br>Share your Google Form link with candidates.
+    </div>
+    <div id="processing" class="empty" style="display:none;">
+      Processing new submissions...
+    </div>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const CRITERIA = [
+      { key: "problem_clarity", name: "Problem Clarity" },
+      { key: "priority_reasoning", name: "Priority Reasoning" },
+      { key: "ai_leverage_efficiency", name: "AI Leverage" },
+      { key: "documentation_quality", name: "Documentation" },
+      { key: "security_awareness", name: "Security" },
+      { key: "performance_score_validity", name: "Performance" },
+      { key: "cursor_integration", name: "Cursor Integration" },
+    ];
+
+    let allCandidates = [];
+    let activeFilter = "all";
+    let activeSort = "score";
+
+    function badgeClass(rec) {
+      if (rec === "Strong Yes") return "good";
+      if (rec === "Yes") return "blue";
+      if (rec === "Maybe") return "maybe";
+      return "bad";
+    }
+
+    function fillClass(score) {
+      if (score >= 8) return "good";
+      if (score >= 6) return "blue";
+      if (score >= 4) return "maybe";
+      return "bad";
+    }
+
+    function filterCandidates(candidates, filter) {
+      if (filter === "all") return candidates;
+      return candidates.filter((c) => c.recommendation === filter);
+    }
+
+    function sortCandidates(candidates, sortBy) {
+      const copy = [...candidates];
+      if (sortBy === "score") {
+        copy.sort((a, b) => Number(b.total_weighted_score || 0) - Number(a.total_weighted_score || 0));
+      } else if (sortBy === "date") {
+        copy.sort((a, b) => new Date(b.evaluated_at || 0) - new Date(a.evaluated_at || 0));
+      } else if (sortBy === "name") {
+        copy.sort((a, b) => (a.candidate_name || "").localeCompare(b.candidate_name || ""));
+      }
+      return copy;
+    }
+
+    function renderCards(candidates) {
+      const feed = $("feed");
+      const empty = $("empty");
+      const processing = $("processing");
+      feed.innerHTML = "";
+
+      const filtered = filterCandidates(candidates, activeFilter);
+      const sorted = sortCandidates(filtered, activeSort);
+
+      if (!candidates.length) {
+        empty.style.display = "block";
+        processing.style.display = "none";
+        return;
+      }
+
+      if (!sorted.length && activeFilter !== "all") {
+        empty.style.display = "none";
+        processing.style.display = "none";
+        feed.innerHTML = '<div class="empty">No candidates match this filter.</div>';
+        return;
+      }
+
+      empty.style.display = "none";
+      processing.style.display = "none";
+
+      sorted.forEach((c, idx) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.dataset.idx = idx;
+
+        const miniBars = CRITERIA.map((crit) => {
+          const score = Number(c.scores?.[crit.key] || 0);
+          const widthPct = (score / 10) * 100;
+          const cls = fillClass(score);
+          return `
+            <div class="mini-bar">
+              <div class="mini-bar-label">${crit.name}</div>
+              <div class="mini-bar-track">
+                <div class="mini-bar-fill ${cls}" style="width:${widthPct}%"></div>
+              </div>
+              <div class="mini-bar-value">${score}/10</div>
+            </div>
+          `;
+        }).join("");
+
+        card.innerHTML = `
+          <div class="card-header">
+            <div>
+              <div class="card-name">${c.candidate_name || "Unnamed Candidate"}</div>
+              <div class="card-title">${c.agent_title || ""}</div>
+              <div class="card-contact">${c.email || ""} ${c.phone ? "• " + c.phone : ""}</div>
+            </div>
+            <div class="card-score">
+              <div class="card-score-num">${Number(c.total_weighted_score || 0).toFixed(1)}</div>
+              <div class="card-score-sub">/ 100</div>
+            </div>
+          </div>
+          <div>
+            <span class="badge ${badgeClass(c.recommendation)}">${c.recommendation || "Maybe"}</span>
+          </div>
+          <div class="card-details">
+            <div class="mini-bars">${miniBars}</div>
+            <div class="list-section">
+              <div class="list-title">Strengths</div>
+              <ul>${(c.strengths || []).map((x) => `<li>${x}</li>`).join("")}</ul>
+            </div>
+            <div class="list-section">
+              <div class="list-title">Weaknesses</div>
+              <ul>${(c.weaknesses || []).map((x) => `<li>${x}</li>`).join("")}</ul>
+            </div>
+            <div class="list-section">
+              <div class="list-title">Priority Definition Summary</div>
+              <div style="font-size:13px;margin-top:4px;">${c.priority_summary || "—"}</div>
+            </div>
+            <div class="timestamp">Submitted: ${c.timestamp || "-"} • Evaluated: ${c.evaluated_at ? new Date(c.evaluated_at).toLocaleString() : "-"}</div>
+          </div>
+          <button class="toggle-btn" onclick="toggleCard(${idx})">View Full Scorecard</button>
+        `;
+
+        feed.appendChild(card);
+      });
+    }
+
+    function toggleCard(idx) {
+      const cards = document.querySelectorAll(".card");
+      cards.forEach((card, i) => {
+        if (i === idx) {
+          card.classList.toggle("expanded");
+          const btn = card.querySelector(".toggle-btn");
+          btn.textContent = card.classList.contains("expanded") ? "Hide Details" : "View Full Scorecard";
+        } else {
+          card.classList.remove("expanded");
+          const btn = card.querySelector(".toggle-btn");
+          if (btn) btn.textContent = "View Full Scorecard";
+        }
+      });
+    }
+
+    async function loadDashboard() {
+      try {
+        const res = await fetch("/api/candidates");
+        const data = await res.json();
+        
+        $("connText").textContent = data.connected ? "Connected" : "Disconnected";
+        $("connDot").classList.toggle("on", Boolean(data.connected));
+        $("lastSync").textContent = data.last_sync_at ? `Last synced: ${new Date(data.last_sync_at).toLocaleString()}` : "Last synced: -";
+        $("lastErr").textContent = data.last_error ? `Error: ${data.last_error}` : "";
+
+        $("statTotal").textContent = data.stats?.total || 0;
+        $("statProcessed").textContent = data.stats?.processed || 0;
+        $("statPending").textContent = data.stats?.pending || 0;
+        $("statStrongYes").textContent = data.stats?.strong_yes || 0;
+
+        allCandidates = data.candidates || [];
+        renderCards(allCandidates);
+      } catch (err) {
+        $("connText").textContent = "Error";
+        $("lastErr").textContent = `Failed to load dashboard: ${err.message}`;
+      }
+    }
+
+    async function syncNow() {
+      const btn = $("syncBtn");
+      btn.disabled = true;
+      btn.textContent = "Syncing...";
+      try {
+        await fetch("/api/process", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
+        await loadDashboard();
+      } catch (err) {
+        $("lastErr").textContent = `Sync failed: ${err.message}`;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Sync Now";
+      }
+    }
+
+    document.querySelectorAll(".filter-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeFilter = btn.dataset.filter;
+        renderCards(allCandidates);
+      });
+    });
+
+    $("sortSelect").addEventListener("change", (e) => {
+      activeSort = e.target.value;
+      renderCards(allCandidates);
+    });
+
+    $("syncBtn").addEventListener("click", syncNow);
+
+    loadDashboard();
+    setInterval(loadDashboard, 30000);
+  </script>
+</body>
+</html>
