@@ -88,6 +88,31 @@ function getApiKeyForProvider(provider) {
   return String(process.env[PROVIDER_CONFIG[provider].envKey] || "").trim();
 }
 
+// Returns list of provider keys that have a real API key set (non-empty, non-placeholder)
+function getAvailableProviders() {
+  loadDotEnv();
+  const placeholderPatterns = [/^your_/i, /^<.*>$/, /^placeholder/i, /^xxx/i, /^changeme/i];
+  const isPlaceholder = (key) => !key || placeholderPatterns.some((re) => re.test(key));
+  return Object.keys(PROVIDER_CONFIG).filter((provider) => {
+    const key = String(process.env[PROVIDER_CONFIG[provider].envKey] || "").trim();
+    return key.length > 0 && !isPlaceholder(key);
+  });
+}
+
+// Randomly selects one provider from those with available API keys
+function pickRandomAvailableProvider() {
+  const available = getAvailableProviders();
+  if (available.length === 0) {
+    throw new Error(
+      "No valid API keys found. Please set at least one provider key in .env: " +
+      Object.values(PROVIDER_CONFIG).map((c) => c.envKey).join(", ")
+    );
+  }
+  const chosen = available[Math.floor(Math.random() * available.length)];
+  console.log(`[Provider Selection] Available: [${available.join(", ")}] → Randomly selected: ${PROVIDER_CONFIG[chosen].label}`);
+  return chosen;
+}
+
 function clampText(s, maxLen = 20000) {
   if (s === null || s === undefined) return "";
   const str = String(s);
@@ -435,7 +460,7 @@ function rowToCandidate(row, rowIndex) {
 }
 
 async function evaluateCandidate(candidate) {
-  const provider = getProviderFromInput(process.env.DEFAULT_MODEL_PROVIDER || "openai");
+  const provider = pickRandomAvailableProvider();
   const apiKey = getApiKeyForProvider(provider);
   const repoContext = await buildRepoContext(candidate.github_url, candidate.zip_file);
   const candidateInputs = {
@@ -642,6 +667,13 @@ server.listen(PORT, () => {
   console.log(`Quest Evaluator running at http://localhost:${PORT}`);
   console.log(`GOOGLE_SHEET_ID: ${process.env.GOOGLE_SHEET_ID ? "configured" : "missing"}`);
   console.log(`GOOGLE_SERVICE_ACCOUNT_KEY: ${process.env.GOOGLE_SERVICE_ACCOUNT_KEY ? "configured" : "missing"}`);
+  const available = getAvailableProviders();
+  if (available.length > 0) {
+    console.log(`Available AI providers (${available.length}): ${available.map((p) => PROVIDER_CONFIG[p].label).join(", ")}`);
+    console.log(`Provider will be randomly selected per evaluation from the available pool.`);
+  } else {
+    console.warn(`WARNING: No valid API keys detected. Set at least one of: ${Object.values(PROVIDER_CONFIG).map((c) => c.envKey).join(", ")}`);
+  }
   console.log(`Polling Google Sheets every ${SHEET_POLL_MS / 1000} seconds.`);
   processUnprocessedRows().catch((err) => console.error("Initial poll error:", err.message));
   setInterval(() => {
