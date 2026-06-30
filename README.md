@@ -86,8 +86,6 @@ Google Form → Google Sheets → Auto Agent Evaluation → Employer Dashboard
 
 **Where default Claude still wins:** nuanced judgment on edge cases, zero setup required, handles ambiguity without prompt engineering.
 
-**Validation test:** ran `jobfit-agent` (a separate project) through the form — scored 65.7/100 ("Maybe") in 8 seconds, correctly flagging weak documentation while praising strong problem clarity. Confirms the rubric is calibrated.
-
 ---
 
 ## 🔧 Features
