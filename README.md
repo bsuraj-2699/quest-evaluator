@@ -66,7 +66,7 @@ Google Form → Google Sheets → Auto Agent Evaluation → Employer Dashboard
 
 ## 🏆 Benchmark — vs. Manual Cursor + Claude Review
 
-<div align="center">
+<div align="left">
 
 | Attribute | `quest-evaluator` | Manual Review |
 |:---|:---:|:---:|
