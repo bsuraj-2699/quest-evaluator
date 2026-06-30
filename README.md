@@ -8,7 +8,7 @@
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-06b6d4?style=for-the-badge&logo=vercel&logoColor=white)](https://quest-evaluator-production.up.railway.app)
 ![Node](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![Railway](https://img.shields.io/badge/Railway-Deployed-0B0D0E?style=for-the-badge&logo=railway&logoColor=white)
+![Render](https://img.shields.io/badge/Railway-Deployed-0B0D0E?style=for-the-badge&logo=railway&logoColor=white)
 ![Google Sheets](https://img.shields.io/badge/Google%20Sheets-API-34A853?style=for-the-badge&logo=googlesheets&logoColor=white)
 
 <br/>
