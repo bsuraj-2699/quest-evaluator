@@ -78,7 +78,7 @@ Google Form → Google Sheets → Auto Agent Evaluation → Employer Dashboard
 | ZIP download | Automatic | Manual download |
 | Provider support | 5 providers | Single session |
 | Employer dashboard | Real-time ranked view | None |
-| Publicly deployed | ✅ Railway URL | N/A |
+| Publicly deployed | ✅ Render URL | N/A |
 
 </div>
 
@@ -151,7 +151,7 @@ Score objectively — no bias toward verbose submissions.
 
 ### Option A — Use the deployed version (recommended)
 ```
-https://quest-evaluator-production.up.railway.app
+https://quest-evaluator.vercel.app/
 ```
 
 ### Option B — Run locally
