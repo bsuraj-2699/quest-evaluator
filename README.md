@@ -8,7 +8,7 @@
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-06b6d4?style=for-the-badge&logo=vercel&logoColor=white)](https://quest-evaluator.vercel.app/)
 ![Node](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![vercel](https://img.shields.io/badge/vercel-Deployed-0B0D0E?style=for-the-badge&logo=vercel&logoColor=white)
+![vercel](https://img.shields.io/badge/vercel-Deployed339933-?style=for-the-badge&logo=vercel&logoColor=white)
 ![Google Sheets](https://img.shields.io/badge/Google%20Sheets-API-34A853?style=for-the-badge&logo=googlesheets&logoColor=white)
 
 <br/>
