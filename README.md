@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=venom&color=0:0f172a,50:1e3a5f,100:6366f1&height=200&section=header&text=quest-evaluator&fontSize=50&fontColor=ffffff&fontAlignY=40&desc=Automated%20AI%20hiring%20pipeline%20%E2%80%94%20form%20to%20scored%20dashboard%2C%20zero%20manual%20effort&descAlignY=62&descSize=14&descColor=a5b4fc&animation=fadeIn" width="100%" />
+<img src="https://capsule-vercel.vercel.app/api?type=venom&color=0:0f172a,50:1e3a5f,100:6366f1&height=200&section=header&text=quest-evaluator&fontSize=50&fontColor=ffffff&fontAlignY=40&desc=Automated%20AI%20hiring%20pipeline%20%E2%80%94%20form%20to%20scored%20dashboard%2C%20zero%20manual%20effort&descAlignY=62&descSize=14&descColor=a5b4fc&animation=fadeIn" width="100%" />
 
 <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=18&duration=2800&pause=900&color=6366F1&center=true&vCenter=true&multiline=false&repeat=true&width=680&height=45&lines=Google+Form+%E2%86%92+Sheet+%E2%86%92+AI+Eval+%E2%86%92+Dashboard;8-second+evaluation+%E2%80%94+112x+faster+than+manual+review;Zero+manual+effort+after+setup+%F0%9F%9A%80;Built+entirely+in+Cursor+in+under+24+hours" alt="Typing" />
 
@@ -8,7 +8,7 @@
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-06b6d4?style=for-the-badge&logo=vercel&logoColor=white)](https://quest-evaluator.vercel.app/)
 ![Node](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![Render](https://img.shields.io/badge/Render-Deployed-0B0D0E?style=for-the-badge&logo=render&logoColor=white)
+![vercel](https://img.shields.io/badge/vercel-Deployed-0B0D0E?style=for-the-badge&logo=vercel&logoColor=white)
 ![Google Sheets](https://img.shields.io/badge/Google%20Sheets-API-34A853?style=for-the-badge&logo=googlesheets&logoColor=white)
 
 <br/>
@@ -78,7 +78,7 @@ Google Form → Google Sheets → Auto Agent Evaluation → Employer Dashboard
 | ZIP download | Automatic | Manual download |
 | Provider support | 5 providers | Single session |
 | Employer dashboard | Real-time ranked view | None |
-| Publicly deployed | ✅ Render URL | N/A |
+| Publicly deployed | ✅ vercel URL | N/A |
 
 </div>
 
@@ -279,6 +279,6 @@ Built by first asking what the company's actual problem was: manually evaluating
 
 <br/>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:6366f1,100:06b6d4&height=120&section=footer&text=score+smarter%2C+hire+faster&fontSize=15&fontColor=e2e8f0&fontAlignY=68" width="100%" />
+<img src="https://capsule-vercel.vercel.app/api?type=waving&color=0:6366f1,100:06b6d4&height=120&section=footer&text=score+smarter%2C+hire+faster&fontSize=15&fontColor=e2e8f0&fontAlignY=68" width="100%" />
 
 </div>
