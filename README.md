@@ -6,7 +6,7 @@
 
 <br/><br/>
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-06b6d4?style=for-the-badge&logo=vercel&logoColor=white)](https://quest-evaluator.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-06b6d4?style=for-the-badge&logo=vercel&logoColor=white)](https://quest-evaluator.onrender.com/)
 ![Node](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![Google Sheets](https://img.shields.io/badge/Google%20Sheets-API-34A853?style=for-the-badge&logo=googlesheets&logoColor=white)
 
@@ -200,13 +200,13 @@ Open **http://localhost:3000**
 
 ---
 
-## ☁️ Deployment (Railway)
+## ☁️ Deployment (Render)
 
 1. Push to GitHub — `.env` and `credentials.json` excluded via `.gitignore`
-2. [railway.app](https://railway.app) → New Project → Deploy from GitHub → select repo
+2. [render.com](https://render.com) → New Project → Deploy from GitHub → select repo
 3. Add environment variables in the Railway dashboard (same as `.env`)
 4. For `credentials.json` — paste the full JSON as a `GOOGLE_CREDENTIALS_JSON` variable
-5. Railway provides a public URL automatically ✅
+5. Render provides a public URL automatically ✅
 
 ---
 
@@ -232,7 +232,6 @@ API keys stored server-side in `.env`, never exposed to frontend · `credentials
 quest-evaluator/
 ├── index.html          # Employer dashboard UI
 ├── server.js           # Node backend + Sheets + AI evaluation
-├── railway.json        # Railway deployment config
 ├── .cursorrules        # Cursor agent configuration
 ├── credentials.json    # Google service account (DO NOT COMMIT)
 ├── .env                # API keys (DO NOT COMMIT)
