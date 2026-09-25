@@ -150,7 +150,7 @@ Score objectively — no bias toward verbose submissions.
 
 ### Option A — Use the deployed version (recommended)
 ```
-https://quest-evaluator.vercel.app/
+https://quest-evaluator.onrender.com/
 ```
 
 ### Option B — Run locally
