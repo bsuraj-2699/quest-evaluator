@@ -77,7 +77,7 @@ Google Form → Google Sheets → Auto Agent Evaluation → Employer Dashboard
 | ZIP download | Automatic | Manual download |
 | Provider support | 5 providers | Single session |
 | Employer dashboard | Real-time ranked view | None |
-| Publicly deployed | ✅ vercel URL | N/A |
+| Publicly deployed | ✅ render URL | N/A |
 
 </div>
 
