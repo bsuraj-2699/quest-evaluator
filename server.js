@@ -34,7 +34,7 @@ const PROVIDER_CONFIG = {
   anthropic: { label: "Anthropic", model: "claude-sonnet-4-20250514", envKey: "ANTHROPIC_API_KEY" },
   gemini: { label: "Google Gemini", model: "gemini-1.5-pro", envKey: "GEMINI_API_KEY" },
   mistral: { label: "Mistral", model: "mistral-large-latest", envKey: "MISTRAL_API_KEY" },
-  groq: { label: "Groq", model: "llama-3.3-70b-versatile", envKey: "GROQ_API_KEY" },
+  groq: { label: "Groq", model: "openai/gpt-oss-120b", envKey: "GROQ_API_KEY" },
 };
 
 const ZIP_TARGET_FILES = ["README.md", ".cursorrules", "server.js", "index.html", "package.json", "app.py", "main.py", "index.js"];
